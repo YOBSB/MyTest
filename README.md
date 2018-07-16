@@ -7,5 +7,8 @@
 + Tomcat 9.0.8
 + Mysql 5.7.22
 
+
 # API
 > 跨服务接口就查看wiki API
+
+jenkins构建触发测试
