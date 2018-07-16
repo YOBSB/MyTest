@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.miniworld.dao.HonorTopMapper">
+
+    <resultMap id="WorksResultMap" type="com.miniworld.entity.Works">
+        <result column="h_works_id" property="worksId" jdbcType="INTEGER"/>
+        <result column="rank" property="rank" jdbcType="INTEGER"/>
+        <result column="h_mini_id" property="miniId" jdbcType="INTEGER"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="qq" property="qq" jdbcType="VARCHAR"/>
+        <result column="mail" property="mail" jdbcType="VARCHAR"/>
+        <result column="phone" property="phone" jdbcType="VARCHAR"/>
+        <result column="team_mates" property="teamMates" jdbcType="VARCHAR"/>
+        <result column="map_id" property="worksMapId" jdbcType="VARCHAR"/>
+        <result column="works_name" property="worksName" jdbcType="VARCHAR"/>
+        <result column="introduce" property="worksIntroduce" jdbcType="VARCHAR"/>
+        <result column="main_image" property="worksMainImage" jdbcType="VARCHAR"/>
+        <result column="main_small_image" property="mainSmallImage" jdbcType="VARCHAR"/>
+        <result column="image_1" property="image1" jdbcType="VARCHAR"/>
+        <result column="image_small_1" property="imageSmall1" jdbcType="VARCHAR"/>
+        <result column="image_2" property="image2" jdbcType="VARCHAR"/>
+        <result column="image_small_2" property="imageSmall2" jdbcType="VARCHAR"/>
+        <result column="image_3" property="image3" jdbcType="VARCHAR"/>
+        <result column="image_small_3" property="imageSmall3" jdbcType="VARCHAR"/>
+        <result column="state" property="worksState" jdbcType="INTEGER"/>
+        <result column="heat" property="worksHeat" jdbcType="INTEGER"/>
+        <result column="week_heat" property="weekHeat" jdbcType="INTEGER"/>
+        <result column="week_heat_time" property="weekHeatTime" jdbcType="INTEGER"/>
+        <result column="submission_time" property="submissionTime" jdbcType="BIGINT"/>
+        <result column="h_create_time" property="createTime" jdbcType="BIGINT"/>
+        <result column="h_update_time" property="updateTime" jdbcType="BIGINT"/>
+    </resultMap>
+
+    <resultMap id="BaseResultMap" type="com.miniworld.entity.WorksHonor">
+        <id column="rank" property="rank" jdbcType="INTEGER"/>
+        <result column="works_id" property="worksId" jdbcType="INTEGER"/>
+        <result column="mini_id" property="miniId" jdbcType="INTEGER"/>
+        <result column="create_time" property="createTime" jdbcType="DATE"/>
+        <result column="update_time" property="updateTime" jdbcType="DATE"/>
+    </resultMap>
+
+
+    <select id="getHonorByWid" resultMap="BaseResultMap">
+        select * from ${eventId}_honortop where works_id=#{wid}
+    </select>
+
+    <select id="getHonorByMiniId" resultMap="BaseResultMap">
+        select * from ${eventId}_honortop where mini_id=#{miniId}
+    </select>
+
+    <select id="getHonorByRank" resultMap="BaseResultMap">
+        select * from ${eventId}_honortop where rank=#{rank}
+    </select>
+
+    <select id="getLastHonor" resultMap="BaseResultMap">
+        select * from ${eventId}_honortop order by rank desc limit 1
+    </select>
+
+    <select id="getWorksInfoBeginRank" resultMap="WorksResultMap">
+        select rank,h.works_id "h_works_id",h.mini_id "h_mini_id",h.create_time "h_create_time" ,h.update_time "h_update_time"
+         ,name,team_mates ,map_id ,works_name ,introduce ,main_image ,main_small_image,image_1, image_small_1, image_2, image_small_2,image_3, image_small_3,state ,submission_time   ,heat ,week_heat ,week_heat_time
+        from ${eventId}_honortop h ,${eventId}_works w
+        where h.works_id=w.id and rank>=#{rank} order by rank asc
+    </select>
+
+    <select id="getHonorListBeginRank" resultMap="BaseResultMap">
+        select * from ${eventId}_honortop where rank>=#{rank} order by rank asc
+    </select>
+
+    <select id="getHonorList" resultMap="BaseResultMap">
+        select * from ${eventId}_honortop
+         order by rank asc limit #{offset}, #{limit}
+    </select>
+
+    <insert id="addHonorTop">
+        insert  into ${eventId}_honortop(works_id,rank,mini_id,create_time,update_time)
+        values(#{worksId},#{rank},#{miniId},#{createTime},#{updateTime})
+    </insert>
+
+    <delete id="delHonorTopByWid">
+        delete from ${eventId}_honortop where works_id=#{wid}
+    </delete>
+
+
+    <update id="upHonorRankList" parameterType="java.util.ArrayList">
+        update ${eventId}_honortop
+        set rank=
+        <foreach collection="list" item="item" index="index"
+                 separator=" " open="case id" close="end,">
+            <if test="item.rank!=null">
+                when #{item.worksId} then (#{item.rank}-1)
+            </if>
+        </foreach>
+        update_time=
+        <foreach collection="list" item="item" index="index"
+                 separator=" " open="case id" close="end">
+            <if test="item.updateTime!=null">
+                when #{item.worksId} then (#{item.updateTime})
+            </if>
+        </foreach>
+        where works_id in
+        <foreach collection="list" index="index" item="item" separator="," open="(" close=")">
+            #{item.worksId}
+        </foreach>
+    </update>
+
+    <update id="updateHonorTop">
+        update ${eventId}_honortop
+        set works_id=#{worksId},mini_id=#{miniId},update_time=#{updateTime}
+        where rank=#{rank}
+    </update>
+
+    <select id="getHonorSize" resultType="java.lang.Integer">
+        select count(*) from ${eventId}_honortop
+    </select>
+
+
+    <delete id="delHonorTopByRank">
+        delete from ${eventId}_honortop where rank=#{rank}
+    </delete>
+
+
+    <update id="cleanHonorTopByRank">
+        update  ${eventId}_honortop set works_id=0,mini_id=0,update_time=0 where rank=#{rank}
+    </update>
+</mapper>

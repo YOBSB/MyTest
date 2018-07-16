@@ -1,0 +1,308 @@
+* {
+    margin: 0;
+    padding: 0;
+    outline: 0
+}
+
+html, body {
+    overflow-x: hidden
+}
+
+body {
+    font: 14px/1.5 "Microsoft YaHei", Tahoma, "simsun", sans-serif;
+    color: #333333;
+    background: #f3f3f3
+}
+
+article, aside, footer, header, hgroup, main, nav, section {
+    display: block
+}
+
+input, select, textarea {
+    font-family: inherit
+}
+
+a {
+    text-decoration: none
+}
+
+img {
+    border: 0;
+    vertical-align: middle;
+    max-width: 100%
+}
+
+ul {
+    list-style: none
+}
+
+table td{
+    word-break: break-all;
+}
+
+.fl {
+    float: left
+}
+
+.fr {
+    float: right
+}
+
+.hide {
+    display: none
+}
+
+.show {
+    display: block
+}
+
+.clearfix {
+    zoom: 1;
+    clear: both
+}
+
+.clearfix:before {
+    display: table;
+    content: "";
+    overflow: hidden
+}
+
+.clearfix:after {
+    content: "\200B";
+    display: block;
+    height: 0;
+    clear: both
+}
+
+.ui-button-small{
+    padding: 5px 10px;
+}
+.ui-table .ui-button{
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+.login-wrap {
+    width: 500px;
+    margin: 200px auto 0 auto;
+    background-color: #fff;
+    border-radius: 4px;
+    padding-bottom: 20px
+}
+
+.login-wrap h1 {
+    height: 60px;
+    line-height: 60px;
+    text-align: center;
+    font-weight: normal;
+    font-size: 18px;
+    border-bottom: 1px solid #eee
+}
+
+.login-wrap form {
+    padding-top: 20px;
+    width: 240px;
+    margin: 0 auto
+}
+
+.login-wrap .form-item {
+    padding: 8px 0
+}
+
+.login-wrap .message {
+    width: 240px;
+    margin: 0 auto
+}
+
+.main{
+    margin: 20px;
+    background-color: #FFFFFF;
+}
+
+.site-header{
+    width: 100%;
+    height: 60px;
+    background-color: #FFFFFF;
+    display: flex;
+    box-shadow: 0 1px 3px rgba(0,0,0,.1);
+}
+.logo{
+    line-height: 60px;
+    font-size: 22px;
+    font-weight: normal;
+    margin-left: 20px;
+}
+
+.site-nav{
+    margin-left: 40px;
+    display: flex;
+    flex: 1;
+    font-size: 14px;
+    line-height: 60px;
+}
+
+.site-nav a{
+    color: #333333;
+}
+
+.site-nav a:hover,
+.site-nav .active a{
+    color: #00bf8e;
+}
+
+.site-nav li{
+    padding: 0 20px;
+}
+.site-nav li.active{
+    background-color: #fbfbfb;
+}
+.logout-wrap{
+    line-height: 60px;
+    padding-right: 30px;
+}
+.logout-wrap a{
+    color: #333333;
+}
+
+.main-header{
+    display: flex;
+    padding: 10px;
+}
+.main-header h2{
+    font-size: 16px;
+    line-height: 40px;
+    flex: 1;
+}
+
+.manage-sec-create,
+.manage-sec-update{
+    background-color: #FFFFFF;
+}
+
+.manage-sec-create form,
+.manage-sec-update form{
+    width: 400px;
+    margin: 0 auto;
+    padding: 50px 0;
+}
+.manage-sec-create h2,
+.manage-sec-update h2{
+    font-size: 16px;
+    text-align: center;
+}
+.manage-sec-create .form-item,
+.manage-sec-update .form-item{
+    padding: 8px 0;
+    display: flex;
+}
+.manage-sec-create .form-item > label,
+.manage-sec-update .form-item > label{
+    width: 80px;
+    line-height: 40px;
+    display: block;
+    text-align: right;
+    margin-right: 10px;
+}
+.manage-sec-create .form-item input,
+.manage-sec-update .form-item input,
+.manage-sec-create .form-item select,
+.manage-sec-update .form-item select,
+.manage-sec-create .form-item textarea,
+.manage-sec-update .form-item textarea{
+    /*width: 220px;*/
+    flex: 1;
+}
+.manage-sec-create .form-item button,
+.manage-sec-update .form-item button{
+    margin-left: 90px;
+}
+
+.manage-sec-create input[type="date-range"]{
+    width: 190px;
+}
+
+.season-config-wrap .wrap{
+    padding: 20px 0 50px 20px;
+    width: 1000px;
+    margin: 0 auto;
+}
+.season-config-wrap .config-form h3{
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+.season-config-wrap .config-form .form-item{
+    display: flex;
+    margin-bottom: 10px;
+}
+.season-config-wrap .config-form .form-item > label{
+    line-height: 40px;
+    width: 150px;
+    text-align: right;
+    margin-right: 10px;
+}
+.season-config-wrap .config-form .form-item button[type="submit"]{
+    margin-left: 160px;
+}
+
+.season-config-wrap .config-form .form-item > label.ui-button{
+    width: 60px;
+    line-height: 20px;
+    text-align: center;
+}
+.season-config-wrap .config-form .form-item .notice{
+    line-height: 40px;
+    font-size: 12px;
+    color: #999999;
+    padding-left: 10px;
+}
+.season-config-wrap .preview{
+    position: relative;
+    display: none;
+}
+.season-config-wrap .preview img{
+    width: 300px;
+}
+.season-config-wrap .preview .delete{
+    position: absolute;
+    right: 0;
+    top: 0;
+    display: block;
+    width: 30px;
+    height: 30px;
+    background: red;
+}
+
+.main-review .sec-header{
+    display: flex;
+    padding: 10px;
+}
+.main-review .filter-box{
+    display: flex;
+    flex: 1;
+}
+.main-review .filter-box a{
+    display: block;
+    padding: 10px 15px;
+    background-color: #f4f4f4;
+    color: #333333;
+}
+.main-review .filter-box a:hover{
+    background-color: #eeeeee;
+}
+.main-review .filter-box a.active{
+    background-color: #00bf8e;
+    color: #FFFFFF;
+}
+.main-review .search-box{
+    display: flex;
+}
+
+.pagination{
+    padding: 20px;
+    text-align: center;
+}
+
+.current-id{
+    line-height: 60px;
+    padding: 0 20px;
+    color: #00a97d;
+}

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.miniworld.dao.AdminMapper">
+  <resultMap id="BaseResultMap" type="com.miniworld.entity.AdminUser">
+    <id column="admin_id" jdbcType="INTEGER" property="adminId" />
+    <result column="admin_loginname" jdbcType="VARCHAR" property="adminLoginName" />
+    <result column="admin_password" jdbcType="VARCHAR" property="adminPassword" />
+    <result column="admin_real_name" jdbcType="VARCHAR" property="adminRealName" />
+	<result column="admin_role_id" jdbcType="INTEGER" property="adminRoleId" />
+    <result column="key_chain" jdbcType="VARCHAR" property="keyChain" />
+	<result column="create_time" jdbcType="BIGINT" property="createTime" />
+    <result column="update_time" jdbcType="BIGINT" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    admin_id, admin_loginname, admin_password, admin_real_name, admin_role_id, key_chain, create_time, update_time
+  </sql>
+  
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from admin_user
+    where admin_id = #{adminId,jdbcType=INTEGER}
+  </select>
+  
+  <select id="selectAll" parameterType="java.lang.String" resultMap="BaseResultMap">
+  	select
+  	<include refid="Base_Column_List" />
+  	from admin_user
+  </select>
+  
+  <select id="selectByName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from admin_user
+    where admin_loginname = #{adminLoginName,jdbcType=VARCHAR}
+  </select>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.miniworld.entity.AdminUser">
+    update admin_user
+    <set>
+      <if test="adminId != null">
+        admin_id = #{adminId,jdbcType=INTEGER},
+      </if>
+      <if test="adminLoginName != null">
+        admin_loginname = #{adminLoginName,jdbcType=VARCHAR},
+      </if>
+      <if test="adminPassword != null">
+        admin_password = #{adminPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="adminRealName != null">
+        admin_real_name = #{adminRealName,jdbcType=VARCHAR},
+      </if>
+      <if test="adminRoleId != null">
+        admin_role_id = #{adminRoleId,jdbcType=INTEGER},
+      </if>
+      <if test="keyChain != null">
+        key_chain = #{keyChain,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=BIGINT},
+      </if>
+   </set>
+    where admin_id = #{adminId,jdbcType=INTEGER}
+  </update>
+  
+  <update id="updateByPrimaryKey" parameterType="com.miniworld.entity.AdminUser">
+    update admin_user
+    set admin_id = #{adminId,jdbcType=INTEGER},
+      admin_loginname = #{adminLoginName,jdbcType=VARCHAR},
+      admin_password = #{adminPassword,jdbcType=VARCHAR},
+      admin_real_name = #{adminRealName,jdbcType=VARCHAR},
+      admin_role_id = #{adminRoleId,jdbcType=INTEGER},
+      key_chain = #{keyChain,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=BIGINT},
+      update_time = #{updateTime,jdbcType=BIGINT}
+    where admin_id = #{adminId,jdbcType=INTEGER}
+  </update>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from admin_user
+    where admin_id = #{adminId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insertAdminUser" parameterType="com.miniworld.entity.AdminUser">
+    insert into admin_user (admin_id, admin_loginname, admin_password, admin_real_name, admin_role_id, key_chain, create_time, update_time
+      )
+    values (#{adminId,jdbcType=INTEGER}, #{adminLoginName,jdbcType=VARCHAR}, #{adminPassword,jdbcType=VARCHAR},
+    		#{adminRealName,jdbcType=INTEGER}, #{adminRoleId,jdbcType=INTEGER}, #{keyChain,jdbcType=VARCHAR},
+    		#{createTime,jdbcType=BIGINT}, #{updateTime,jdbcType=BIGINT}
+      )
+  </insert>
+</mapper>

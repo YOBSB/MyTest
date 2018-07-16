@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.miniworld.dao.SeasonMapper" >
+  <resultMap id="BaseResultMap" type="com.miniworld.entity.Season" >
+    <id column="season_id" property="id" jdbcType="VARCHAR" />
+    <result column="season_name" property="seasonName" jdbcType="VARCHAR" />
+    <result column="season_description" property="seasonDescription" jdbcType="VARCHAR" />
+    <result column="season_key_words" property="seasonKeyWords" jdbcType="VARCHAR" />
+    <result column="start_time" property="startTime" jdbcType="BIGINT" />
+    <result column="end_time" property="endTime" jdbcType="BIGINT" />
+    <result column="create_time" property="createTime" jdbcType="BIGINT" />
+    <result column="update_time" property="updateTime" jdbcType="BIGINT" />
+    <result column="season_life" property="seasonLife" jdbcType="INTEGER" />
+    <result column="submit_start_time" property="submitStartTime" jdbcType="BIGINT" />
+    <result column="submit_end_time" property="submitEndTime" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    season_id, season_name, season_description, season_key_words, start_time, end_time, 
+    create_time, update_time, season_life, submit_start_time, submit_end_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from season
+    where season_id = #{seasonId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from season
+    where season_id = #{seasonId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.miniworld.entity.Season" >
+    insert into season (season_id, season_name, season_description, 
+      season_key_words, start_time, end_time, 
+      create_time, update_time, season_life, 
+      submit_start_time, submit_end_time)
+    values (#{seasonId,jdbcType=VARCHAR}, #{seasonName,jdbcType=VARCHAR}, #{seasonDescription,jdbcType=VARCHAR}, 
+      #{seasonKeyWords,jdbcType=VARCHAR}, #{startTime,jdbcType=BIGINT}, #{endTime,jdbcType=BIGINT}, 
+      #{createTime,jdbcType=BIGINT}, #{updateTime,jdbcType=BIGINT}, #{seasonLife,jdbcType=INTEGER}, 
+      #{submitStartTime,jdbcType=BIGINT}, #{submitEndTime,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.miniworld.entity.Season" >
+    insert into season
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="seasonId != null" >
+        season_id,
+      </if>
+      <if test="seasonName != null" >
+        season_name,
+      </if>
+      <if test="seasonDescription != null" >
+        season_description,
+      </if>
+      <if test="seasonKeyWords != null" >
+        season_key_words,
+      </if>
+      <if test="startTime != null" >
+        start_time,
+      </if>
+      <if test="endTime != null" >
+        end_time,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="seasonLife != null" >
+        season_life,
+      </if>
+      <if test="submitStartTime != null" >
+        submit_start_time,
+      </if>
+      <if test="submitEndTime != null" >
+        submit_end_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="seasonId != null" >
+        #{seasonId,jdbcType=VARCHAR},
+      </if>
+      <if test="seasonName != null" >
+        #{seasonName,jdbcType=VARCHAR},
+      </if>
+      <if test="seasonDescription != null" >
+        #{seasonDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="seasonKeyWords != null" >
+        #{seasonKeyWords,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null" >
+        #{startTime,jdbcType=BIGINT},
+      </if>
+      <if test="endTime != null" >
+        #{endTime,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=BIGINT},
+      </if>
+      <if test="seasonLife != null" >
+        #{seasonLife,jdbcType=INTEGER},
+      </if>
+      <if test="submitStartTime != null" >
+        #{submitStartTime,jdbcType=BIGINT},
+      </if>
+      <if test="submitEndTime != null" >
+        #{submitEndTime,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.miniworld.entity.Season" >
+    update season
+    <set >
+      <if test="seasonName != null" >
+        season_name = #{seasonName,jdbcType=VARCHAR},
+      </if>
+      <if test="seasonDescription != null" >
+        season_description = #{seasonDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="seasonKeyWords != null" >
+        season_key_words = #{seasonKeyWords,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null" >
+        start_time = #{startTime,jdbcType=BIGINT},
+      </if>
+      <if test="endTime != null" >
+        end_time = #{endTime,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=BIGINT},
+      </if>
+      <if test="seasonLife != null" >
+        season_life = #{seasonLife,jdbcType=INTEGER},
+      </if>
+      <if test="submitStartTime != null" >
+        submit_start_time = #{submitStartTime,jdbcType=BIGINT},
+      </if>
+      <if test="submitEndTime != null" >
+        submit_end_time = #{submitEndTime,jdbcType=BIGINT},
+      </if>
+    </set>
+    where season_id = #{seasonId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.miniworld.entity.Season" >
+    update season
+    set season_name = #{seasonName,jdbcType=VARCHAR},
+      season_description = #{seasonDescription,jdbcType=VARCHAR},
+      season_key_words = #{seasonKeyWords,jdbcType=VARCHAR},
+      start_time = #{startTime,jdbcType=BIGINT},
+      end_time = #{endTime,jdbcType=BIGINT},
+      create_time = #{createTime,jdbcType=BIGINT},
+      update_time = #{updateTime,jdbcType=BIGINT},
+      season_life = #{seasonLife,jdbcType=INTEGER},
+      submit_start_time = #{submitStartTime,jdbcType=BIGINT},
+      submit_end_time = #{submitEndTime,jdbcType=BIGINT}
+    where season_id = #{seasonId,jdbcType=VARCHAR}
+  </update>
+
+   <select id="selectActiveSeason" resultMap="BaseResultMap">
+    select * from season
+    where season_life = 1
+  </select>
+
+  <select id="selectByTime" resultMap="BaseResultMap">
+     select * from season
+     where start_time between #{startTime} and #{endTime}
+  </select>
+    
+  <select id="selectLastestSeason" resultType="java.lang.String">
+   select  season_id FROM season 
+   ORDER BY create_time desc LIMIT 1
+  </select>
+
+
+  <select id="isExistTable" resultType="java.lang.Integer">
+       select count(1) ${table}_works from INFORMATION_SCHEMA.TABLES where
+     TABLE_SCHEMA='eventSys' and TABLE_NAME='${table}_works'
+  </select>
+
+</mapper>

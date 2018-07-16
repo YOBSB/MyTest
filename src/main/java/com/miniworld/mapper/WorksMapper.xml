@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.miniworld.dao.WorksDao">
+
+    <resultMap id="BaseResultMap" type="com.miniworld.entity.Works">
+        <id column="id" property="worksId" jdbcType="INTEGER"/>
+        <result column="mini_id" property="miniId" jdbcType="INTEGER"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="qq" property="qq" jdbcType="VARCHAR"/>
+        <result column="mail" property="mail" jdbcType="VARCHAR"/>
+        <result column="phone" property="phone" jdbcType="VARCHAR"/>
+        <result column="team_mates" property="teamMates" jdbcType="VARCHAR"/>
+        <result column="map_id" property="worksMapId" jdbcType="VARCHAR"/>
+        <result column="works_name" property="worksName" jdbcType="VARCHAR"/>
+        <result column="introduce" property="worksIntroduce" jdbcType="VARCHAR"/>
+        <result column="main_image" property="worksMainImage" jdbcType="VARCHAR"/>
+        <result column="main_small_image" property="mainSmallImage" jdbcType="VARCHAR"/>
+        <result column="image_1" property="image1" jdbcType="VARCHAR"/>
+        <result column="image_small_1" property="imageSmall1" jdbcType="VARCHAR"/>
+        <result column="image_2" property="image2" jdbcType="VARCHAR"/>
+        <result column="image_small_2" property="imageSmall2" jdbcType="VARCHAR"/>
+        <result column="image_3" property="image3" jdbcType="VARCHAR"/>
+        <result column="image_small_3" property="imageSmall3" jdbcType="VARCHAR"/>
+        <result column="state" property="worksState" jdbcType="INTEGER"/>
+        <result column="heat" property="worksHeat" jdbcType="INTEGER"/>
+        <result column="week_heat" property="weekHeat" jdbcType="INTEGER"/>
+        <result column="week_heat_time" property="weekHeatTime" jdbcType="INTEGER"/>
+        <result column="submission_time" property="submissionTime" jdbcType="BIGINT"/>
+        <result column="create_time" property="createTime" jdbcType="BIGINT"/>
+        <result column="update_time" property="updateTime" jdbcType="BIGINT"/>
+    </resultMap>
+
+    <sql id="submit_list">
+    mini_id ,name ,qq ,mail ,phone ,team_mates ,map_id ,works_name ,introduce ,main_image ,main_small_image,image_1, image_small_1, image_2, image_small_2,image_3, image_small_3,state ,submission_time ,create_time ,update_time ,heat ,week_heat ,week_heat_time
+  	</sql>
+
+    <insert id="submitWorks" parameterType="com.miniworld.entity.Works">
+        insert into ${eventId}_works(
+        <include refid="submit_list"/>
+        )
+        values(#{mini_id},#{name},#{qq},#{mail},#{phone},#{team_mates},#{works_map_id},#{works_name,jdbcType=VARCHAR},#{works_introduce},#{works_main_image},#{main_small_image},#{image_1},#{image_small_1},#{image_2},#{image_small_2},#{image_3},#{image_small_3},#{works_state},#{submission_time},#{create_time},#{update_time},#{heat},#{week_heat},#{week_heat_time})
+    </insert>
+
+    <select id="getWorksIdByMiniId" resultMap="BaseResultMap">
+
+    	select * from ${eventId}_works where mini_id = #{miniId}
+    </select>
+
+    <update id="upWorksHeat" parameterType="java.util.ArrayList">
+        UPDATE ${eventId}_works
+        set heat=
+        <foreach collection="list" item="item" index="index"
+                 separator=" " open="case id" close="end,">
+            <if test="item.worksHeat!=null">
+                when #{item.worksId} then #{item.worksHeat}
+            </if>
+        </foreach>
+        week_heat=
+        <foreach collection="list" item="item" index="index"
+                 separator=" " open="case id" close="end,">
+            <if test="item.weekHeat!=null">
+                when #{item.worksId} then #{item.weekHeat}
+            </if>
+
+        </foreach>
+        week_heat_time=
+        <foreach collection="list" item="item" index="index"
+                 separator=" " open="case id" close="end">
+            <if test="item.weekHeatTime!=null">
+                when #{item.worksId} then #{item.weekHeatTime}
+            </if>
+        </foreach>
+        where id in
+        <foreach collection="list" index="index" item="item" separator="," open="(" close=")">
+            #{item.worksId}
+        </foreach>
+    </update>
+
+    <select id="getWorksByLimit" resultMap="BaseResultMap">
+        select * from ${eventId}_works
+        order by id limit #{offset},#{limit}
+    </select>
+
+    <select id="getByUid" resultMap="BaseResultMap">
+        select * from ${eventId}_works where mini_id=${uid};
+    </select>
+
+    <select id="getWorksByWorksId" resultMap="BaseResultMap">
+          select * from ${eventId}_works where id = #{worksId}
+    </select>
+</mapper>

@@ -1,0 +1,481 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.miniworld.dao.MatchMapper" >
+  <resultMap id="BaseResultMap" type="com.miniworld.entity.Match" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="season_id" property="seasonId" jdbcType="VARCHAR" />
+    <result column="banner_image" property="bannerImage" jdbcType="VARCHAR" />
+    <result column="theme_image" property="themeImage" jdbcType="VARCHAR" />
+    <result column="time_image" property="timeImage" jdbcType="VARCHAR" />
+    <result column="reward_image" property="rewardImage" jdbcType="VARCHAR" />
+    <result column="rule_image" property="ruleImage" jdbcType="VARCHAR" />
+    <result column="rule" property="rule" jdbcType="VARCHAR" />
+    <result column="review_image" property="reviewImage" jdbcType="VARCHAR" />
+    <result column="review" property="review" jdbcType="VARCHAR" />
+    <result column="game_introduce_image" property="gameIntroduceImage" jdbcType="VARCHAR" />
+    <result column="game_introduce" property="gameIntroduce" jdbcType="VARCHAR" />
+    <result column="submission_introduce_image" property="submissionIntroduceImage" jdbcType="VARCHAR" />
+    <result column="submission_introduce" property="submissionIntroduce" jdbcType="VARCHAR" />
+    <result column="works_introduce_image" property="worksIntroduceImage" jdbcType="VARCHAR" />
+    <result column="works_introduce" property="worksIntroduce" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="BIGINT" />
+    <result column="update_time" property="updateTime" jdbcType="BIGINT" />
+    <result column="partner" property="partner" jdbcType="VARCHAR" />
+    <result column="judge_guest" property="judgeGuest" jdbcType="VARCHAR" />
+    <result column="mobile_banner_image" property="mobileBannerImage" jdbcType="VARCHAR" />
+    <result column="mobile_theme_image" property="mobileThemeImage" jdbcType="VARCHAR" />
+    <result column="mobile_time_image" property="mobileTimeImage" jdbcType="VARCHAR" />
+    <result column="mobile_reward_image" property="mobileRewardImage" jdbcType="VARCHAR" />
+    <result column="mobile_rule_image" property="mobileRuleImage" jdbcType="VARCHAR" />
+    <result column="mobile_rule" property="mobileRule" jdbcType="VARCHAR" />
+    <result column="mobile_review_image" property="mobileReviewImage" jdbcType="VARCHAR" />
+    <result column="mobile_review" property="mobileReview" jdbcType="VARCHAR" />
+    <result column="mobile_game_introduce_image" property="mobileGameIntroduceImage" jdbcType="VARCHAR" />
+    <result column="mobile_game_introduce" property="mobileGameIntroduce" jdbcType="VARCHAR" />
+    <result column="mobile_submission_introduce_image" property="mobileSubmissionIntroduceImage" jdbcType="VARCHAR" />
+    <result column="mobile_submission_introduce" property="mobileSubmissionIntroduce" jdbcType="VARCHAR" />
+    <result column="mobile_works_introduce_image" property="mobileWorksIntroduceImage" jdbcType="VARCHAR" />
+    <result column="mobile_works_introduce" property="mobileWorksIntroduce" jdbcType="VARCHAR" />
+    <result column="mobile_partner" property="mobilePartner" jdbcType="VARCHAR" />
+    <result column="mobile_judge_guest" property="mobileJudgeGuest" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, season_id, banner_image, theme_image, time_image, reward_image, rule_image, rule, 
+    review_image, review, game_introduce_image, game_introduce, submission_introduce_image, 
+
+    submission_introduce, works_introduce_image, works_introduce, create_time, update_time, 
+    partner, judge_guest, mobile_banner_image, mobile_theme_image, mobile_time_image, 
+    mobile_reward_image, mobile_rule_image, mobile_rule, mobile_review_image, mobile_review, 
+    mobile_game_introduce_image, mobile_game_introduce, mobile_submission_introduce_image, 
+    mobile_submission_introduce, mobile_works_introduce_image, mobile_works_introduce, 
+    mobile_partner, mobile_judge_guest
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    
+    from matchconfig
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectMatchBySeasonId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from matchconfig
+    where season_id = #{seasonId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    
+    delete from matchconfig
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.miniworld.entity.Match" >
+    
+    insert into matchconfig (id, season_id, banner_image, 
+      theme_image, time_image, reward_image, 
+      rule_image, rule, review_image, 
+      review, game_introduce_image, game_introduce, 
+      submission_introduce_image, submission_introduce, 
+      works_introduce_image, works_introduce, create_time, 
+      
+      update_time, partner, judge_guest, 
+      mobile_banner_image, mobile_theme_image, mobile_time_image, 
+      mobile_reward_image, mobile_rule_image, mobile_rule, 
+      mobile_review_image, mobile_review, mobile_game_introduce_image, 
+      mobile_game_introduce, mobile_submission_introduce_image, 
+      mobile_submission_introduce, mobile_works_introduce_image, 
+      mobile_works_introduce, mobile_partner, mobile_judge_guest
+      )
+    values (#{id,jdbcType=INTEGER}, #{seasonId,jdbcType=VARCHAR}, #{bannerImage,jdbcType=VARCHAR}, 
+      #{themeImage,jdbcType=VARCHAR}, #{timeImage,jdbcType=VARCHAR}, #{rewardImage,jdbcType=VARCHAR}, 
+      #{ruleImage,jdbcType=VARCHAR}, #{rule,jdbcType=VARCHAR}, #{reviewImage,jdbcType=VARCHAR}, 
+      #{review,jdbcType=VARCHAR}, #{gameIntroduceImage,jdbcType=VARCHAR}, #{gameIntroduce,jdbcType=VARCHAR}, 
+      #{submissionIntroduceImage,jdbcType=VARCHAR}, #{submissionIntroduce,jdbcType=VARCHAR}, 
+      #{worksIntroduceImage,jdbcType=VARCHAR}, #{worksIntroduce,jdbcType=VARCHAR}, #{createTime,jdbcType=BIGINT}, 
+      
+      #{updateTime,jdbcType=BIGINT}, #{partner,jdbcType=VARCHAR}, #{judgeGuest,jdbcType=VARCHAR}, 
+      #{mobileBannerImage,jdbcType=VARCHAR}, #{mobileThemeImage,jdbcType=VARCHAR}, #{mobileTimeImage,jdbcType=VARCHAR}, 
+      #{mobileRewardImage,jdbcType=VARCHAR}, #{mobileRuleImage,jdbcType=VARCHAR}, #{mobileRule,jdbcType=VARCHAR}, 
+      #{mobileReviewImage,jdbcType=VARCHAR}, #{mobileReview,jdbcType=VARCHAR}, #{mobileGameIntroduceImage,jdbcType=VARCHAR}, 
+      #{mobileGameIntroduce,jdbcType=VARCHAR}, #{mobileSubmissionIntroduceImage,jdbcType=VARCHAR}, 
+      #{mobileSubmissionIntroduce,jdbcType=VARCHAR}, #{mobileWorksIntroduceImage,jdbcType=VARCHAR}, 
+      #{mobileWorksIntroduce,jdbcType=VARCHAR}, #{mobilePartner,jdbcType=VARCHAR}, #{mobileJudgeGuest,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.miniworld.entity.Match" >
+   
+    insert into matchconfig
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="seasonId != null" >
+        season_id,
+      </if>
+      <if test="bannerImage != null" >
+        banner_image,
+      </if>
+      <if test="themeImage != null" >
+        theme_image,
+      </if>
+      <if test="timeImage != null" >
+        time_image,
+      </if>
+      <if test="rewardImage != null" >
+        reward_image,
+      </if>
+      <if test="ruleImage != null" >
+        rule_image,
+      </if>
+      <if test="rule != null" >
+        rule,
+      </if>
+      <if test="reviewImage != null" >
+        review_image,
+      </if>
+      <if test="review != null" >
+        review,
+      </if>
+      <if test="gameIntroduceImage != null" >
+        game_introduce_image,
+      </if>
+      <if test="gameIntroduce != null" >
+        game_introduce,
+      </if>
+      <if test="submissionIntroduceImage != null" >
+        submission_introduce_image,
+      </if>
+      <if test="submissionIntroduce != null" >
+        submission_introduce,
+      </if>
+      <if test="worksIntroduceImage != null" >
+        works_introduce_image,
+      </if>
+      <if test="worksIntroduce != null" >
+        works_introduce,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="partner != null" >
+        partner,
+      </if>
+      <if test="judgeGuest != null" >
+        judge_guest,
+      </if>
+      <if test="mobileBannerImage != null" >
+        mobile_banner_image,
+      </if>
+      <if test="mobileThemeImage != null" >
+        mobile_theme_image,
+      </if>
+      <if test="mobileTimeImage != null" >
+        mobile_time_image,
+      </if>
+      <if test="mobileRewardImage != null" >
+        mobile_reward_image,
+      </if>
+      <if test="mobileRuleImage != null" >
+        mobile_rule_image,
+      </if>
+      <if test="mobileRule != null" >
+        mobile_rule,
+      </if>
+      <if test="mobileReviewImage != null" >
+        mobile_review_image,
+      </if>
+      <if test="mobileReview != null" >
+        mobile_review,
+      </if>
+      <if test="mobileGameIntroduceImage != null" >
+        mobile_game_introduce_image,
+      </if>
+      <if test="mobileGameIntroduce != null" >
+        mobile_game_introduce,
+      </if>
+      <if test="mobileSubmissionIntroduceImage != null" >
+        mobile_submission_introduce_image,
+      </if>
+      <if test="mobileSubmissionIntroduce != null" >
+        mobile_submission_introduce,
+      </if>
+      <if test="mobileWorksIntroduceImage != null" >
+        mobile_works_introduce_image,
+      </if>
+      <if test="mobileWorksIntroduce != null" >
+        mobile_works_introduce,
+      </if>
+      <if test="mobilePartner != null" >
+        mobile_partner,
+      </if>
+      <if test="mobileJudgeGuest != null" >
+        mobile_judge_guest,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="seasonId != null" >
+        #{seasonId,jdbcType=VARCHAR},
+      </if>
+      <if test="bannerImage != null" >
+        #{bannerImage,jdbcType=VARCHAR},
+      </if>
+      <if test="themeImage != null" >
+        #{themeImage,jdbcType=VARCHAR},
+      </if>
+      <if test="timeImage != null" >
+        #{timeImage,jdbcType=VARCHAR},
+      </if>
+      <if test="rewardImage != null" >
+        #{rewardImage,jdbcType=VARCHAR},
+      </if>
+      <if test="ruleImage != null" >
+        #{ruleImage,jdbcType=VARCHAR},
+      </if>
+      <if test="rule != null" >
+        #{rule,jdbcType=VARCHAR},
+      </if>
+      <if test="reviewImage != null" >
+        #{reviewImage,jdbcType=VARCHAR},
+      </if>
+      <if test="review != null" >
+        #{review,jdbcType=VARCHAR},
+      </if>
+      <if test="gameIntroduceImage != null" >
+        #{gameIntroduceImage,jdbcType=VARCHAR},
+      </if>
+      <if test="gameIntroduce != null" >
+        #{gameIntroduce,jdbcType=VARCHAR},
+      </if>
+      <if test="submissionIntroduceImage != null" >
+        #{submissionIntroduceImage,jdbcType=VARCHAR},
+      </if>
+      <if test="submissionIntroduce != null" >
+        #{submissionIntroduce,jdbcType=VARCHAR},
+      </if>
+      <if test="worksIntroduceImage != null" >
+        #{worksIntroduceImage,jdbcType=VARCHAR},
+      </if>
+      <if test="worksIntroduce != null" >
+        #{worksIntroduce,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=BIGINT},
+      </if>
+      <if test="partner != null" >
+        #{partner,jdbcType=VARCHAR},
+      </if>
+      <if test="judgeGuest != null" >
+        #{judgeGuest,jdbcType=VARCHAR},
+      </if>
+      <if test="mobileBannerImage != null" >
+        #{mobileBannerImage,jdbcType=VARCHAR},
+      </if>
+      <if test="mobileThemeImage != null" >
+        #{mobileThemeImage,jdbcType=VARCHAR},
+      </if>
+      <if test="mobileTimeImage != null" >
+        #{mobileTimeImage,jdbcType=VARCHAR},
+      </if>
+      <if test="mobileRewardImage != null" >
+        #{mobileRewardImage,jdbcType=VARCHAR},
+      </if>
+      <if test="mobileRuleImage != null" >
+        #{mobileRuleImage,jdbcType=VARCHAR},
+      </if>
+      <if test="mobileRule != null" >
+        #{mobileRule,jdbcType=VARCHAR},
+      </if>
+      <if test="mobileReviewImage != null" >
+        #{mobileReviewImage,jdbcType=VARCHAR},
+      </if>
+      <if test="mobileReview != null" >
+        #{mobileReview,jdbcType=VARCHAR},
+      </if>
+      <if test="mobileGameIntroduceImage != null" >
+        #{mobileGameIntroduceImage,jdbcType=VARCHAR},
+      </if>
+      <if test="mobileGameIntroduce != null" >
+        #{mobileGameIntroduce,jdbcType=VARCHAR},
+      </if>
+      <if test="mobileSubmissionIntroduceImage != null" >
+        #{mobileSubmissionIntroduceImage,jdbcType=VARCHAR},
+      </if>
+      <if test="mobileSubmissionIntroduce != null" >
+        #{mobileSubmissionIntroduce,jdbcType=VARCHAR},
+      </if>
+      <if test="mobileWorksIntroduceImage != null" >
+        #{mobileWorksIntroduceImage,jdbcType=VARCHAR},
+      </if>
+      <if test="mobileWorksIntroduce != null" >
+        #{mobileWorksIntroduce,jdbcType=VARCHAR},
+      </if>
+      <if test="mobilePartner != null" >
+        #{mobilePartner,jdbcType=VARCHAR},
+      </if>
+      <if test="mobileJudgeGuest != null" >
+        #{mobileJudgeGuest,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.miniworld.entity.Match" >
+    
+    update matchconfig
+    <set >
+      <if test="seasonId != null" >
+        season_id = #{seasonId,jdbcType=VARCHAR},
+      </if>
+      <if test="bannerImage != null" >
+        banner_image = #{bannerImage,jdbcType=VARCHAR},
+      </if>
+      <if test="themeImage != null" >
+        theme_image = #{themeImage,jdbcType=VARCHAR},
+      </if>
+      <if test="timeImage != null" >
+        time_image = #{timeImage,jdbcType=VARCHAR},
+      </if>
+      <if test="rewardImage != null" >
+        reward_image = #{rewardImage,jdbcType=VARCHAR},
+      </if>
+      <if test="ruleImage != null" >
+        rule_image = #{ruleImage,jdbcType=VARCHAR},
+      </if>
+      <if test="rule != null" >
+        rule = #{rule,jdbcType=VARCHAR},
+      </if>
+      <if test="reviewImage != null" >
+        review_image = #{reviewImage,jdbcType=VARCHAR},
+      </if>
+      <if test="review != null" >
+        review = #{review,jdbcType=VARCHAR},
+      </if>
+      <if test="gameIntroduceImage != null" >
+        game_introduce_image = #{gameIntroduceImage,jdbcType=VARCHAR},
+      </if>
+      <if test="gameIntroduce != null" >
+        game_introduce = #{gameIntroduce,jdbcType=VARCHAR},
+      </if>
+      <if test="submissionIntroduceImage != null" >
+        submission_introduce_image = #{submissionIntroduceImage,jdbcType=VARCHAR},
+      </if>
+      <if test="submissionIntroduce != null" >
+        submission_introduce = #{submissionIntroduce,jdbcType=VARCHAR},
+      </if>
+      <if test="worksIntroduceImage != null" >
+        works_introduce_image = #{worksIntroduceImage,jdbcType=VARCHAR},
+      </if>
+      <if test="worksIntroduce != null" >
+        works_introduce = #{worksIntroduce,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=BIGINT},
+      </if>
+      <if test="partner != null" >
+        partner = #{partner,jdbcType=VARCHAR},
+      </if>
+      <if test="judgeGuest != null" >
+        judge_guest = #{judgeGuest,jdbcType=VARCHAR},
+      </if>
+      <if test="mobileBannerImage != null" >
+        mobile_banner_image = #{mobileBannerImage,jdbcType=VARCHAR},
+      </if>
+      <if test="mobileThemeImage != null" >
+        mobile_theme_image = #{mobileThemeImage,jdbcType=VARCHAR},
+      </if>
+      <if test="mobileTimeImage != null" >
+        mobile_time_image = #{mobileTimeImage,jdbcType=VARCHAR},
+      </if>
+      <if test="mobileRewardImage != null" >
+        mobile_reward_image = #{mobileRewardImage,jdbcType=VARCHAR},
+      </if>
+      <if test="mobileRuleImage != null" >
+        mobile_rule_image = #{mobileRuleImage,jdbcType=VARCHAR},
+      </if>
+      <if test="mobileRule != null" >
+        mobile_rule = #{mobileRule,jdbcType=VARCHAR},
+      </if>
+      <if test="mobileReviewImage != null" >
+        mobile_review_image = #{mobileReviewImage,jdbcType=VARCHAR},
+      </if>
+      <if test="mobileReview != null" >
+        mobile_review = #{mobileReview,jdbcType=VARCHAR},
+      </if>
+      <if test="mobileGameIntroduceImage != null" >
+        mobile_game_introduce_image = #{mobileGameIntroduceImage,jdbcType=VARCHAR},
+      </if>
+      <if test="mobileGameIntroduce != null" >
+        mobile_game_introduce = #{mobileGameIntroduce,jdbcType=VARCHAR},
+      </if>
+      <if test="mobileSubmissionIntroduceImage != null" >
+        mobile_submission_introduce_image = #{mobileSubmissionIntroduceImage,jdbcType=VARCHAR},
+      </if>
+      <if test="mobileSubmissionIntroduce != null" >
+        mobile_submission_introduce = #{mobileSubmissionIntroduce,jdbcType=VARCHAR},
+      </if>
+      <if test="mobileWorksIntroduceImage != null" >
+        mobile_works_introduce_image = #{mobileWorksIntroduceImage,jdbcType=VARCHAR},
+      </if>
+      <if test="mobileWorksIntroduce != null" >
+        mobile_works_introduce = #{mobileWorksIntroduce,jdbcType=VARCHAR},
+      </if>
+      <if test="mobilePartner != null" >
+        mobile_partner = #{mobilePartner,jdbcType=VARCHAR},
+      </if>
+      <if test="mobileJudgeGuest != null" >
+        mobile_judge_guest = #{mobileJudgeGuest,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.miniworld.entity.Match" >
+   
+    update matchconfig
+    set season_id = #{seasonId,jdbcType=VARCHAR},
+      banner_image = #{bannerImage,jdbcType=VARCHAR},
+      theme_image = #{themeImage,jdbcType=VARCHAR},
+      time_image = #{timeImage,jdbcType=VARCHAR},
+      reward_image = #{rewardImage,jdbcType=VARCHAR},
+      rule_image = #{ruleImage,jdbcType=VARCHAR},
+      rule = #{rule,jdbcType=VARCHAR},
+      review_image = #{reviewImage,jdbcType=VARCHAR},
+      review = #{review,jdbcType=VARCHAR},
+      game_introduce_image = #{gameIntroduceImage,jdbcType=VARCHAR},
+      game_introduce = #{gameIntroduce,jdbcType=VARCHAR},
+      submission_introduce_image = #{submissionIntroduceImage,jdbcType=VARCHAR},
+      submission_introduce = #{submissionIntroduce,jdbcType=VARCHAR},
+      works_introduce_image = #{worksIntroduceImage,jdbcType=VARCHAR},
+      works_introduce = #{worksIntroduce,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=BIGINT},
+      
+      update_time = #{updateTime,jdbcType=BIGINT},
+      partner = #{partner,jdbcType=VARCHAR},
+      judge_guest = #{judgeGuest,jdbcType=VARCHAR},
+      mobile_banner_image = #{mobileBannerImage,jdbcType=VARCHAR},
+      mobile_theme_image = #{mobileThemeImage,jdbcType=VARCHAR},
+      mobile_time_image = #{mobileTimeImage,jdbcType=VARCHAR},
+      mobile_reward_image = #{mobileRewardImage,jdbcType=VARCHAR},
+      mobile_rule_image = #{mobileRuleImage,jdbcType=VARCHAR},
+      mobile_rule = #{mobileRule,jdbcType=VARCHAR},
+      mobile_review_image = #{mobileReviewImage,jdbcType=VARCHAR},
+      mobile_review = #{mobileReview,jdbcType=VARCHAR},
+      mobile_game_introduce_image = #{mobileGameIntroduceImage,jdbcType=VARCHAR},
+      mobile_game_introduce = #{mobileGameIntroduce,jdbcType=VARCHAR},
+      mobile_submission_introduce_image = #{mobileSubmissionIntroduceImage,jdbcType=VARCHAR},
+      mobile_submission_introduce = #{mobileSubmissionIntroduce,jdbcType=VARCHAR},
+      mobile_works_introduce_image = #{mobileWorksIntroduceImage,jdbcType=VARCHAR},
+      mobile_works_introduce = #{mobileWorksIntroduce,jdbcType=VARCHAR},
+      mobile_partner = #{mobilePartner,jdbcType=VARCHAR},
+      mobile_judge_guest = #{mobileJudgeGuest,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

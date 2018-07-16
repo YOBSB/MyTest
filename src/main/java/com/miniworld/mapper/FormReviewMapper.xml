@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.miniworld.dao.FormReviewMapper">
+  <resultMap  type="com.miniworld.entity.Works" id="ReviewresultMap">
+    <id column="id" jdbcType="INTEGER" property="worksId" />
+    <result column="mini_id" jdbcType="INTEGER" property="miniId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="qq" jdbcType="VARCHAR" property="qq" />
+	<result column="mail" jdbcType="VARCHAR" property="mail" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="team_mates" jdbcType="VARCHAR" property="teamMates" />
+    <result column="map_id" jdbcType="INTEGER" property="worksMapId" />
+    <result column="works_name" jdbcType="VARCHAR" property="worksName" />
+    <result column="introduce" jdbcType="VARCHAR" property="worksIntroduce" />
+    <result column="main_image" jdbcType="VARCHAR" property="worksMainImage" />
+    <result column="main_small_image" jdbcType="VARCHAR" property="mainSmallImage" />
+    <result column="image_1" jdbcType="VARCHAR" property="image1" />
+    <result column="image_small_1" jdbcType="VARCHAR" property="imageSmall1" />
+    <result column="image_2" jdbcType="VARCHAR" property="image2" />
+    <result column="image_small_2" jdbcType="VARCHAR" property="imageSmall2" />
+    <result column="image_3" jdbcType="VARCHAR" property="image3" />
+    <result column="image_small_3" jdbcType="VARCHAR" property="imageSmall3" />
+    <result column="state" jdbcType="INTEGER" property="worksState" />
+    <result column="heat" jdbcType="INTEGER" property="worksHeat" />
+	<result column="week_heat" jdbcType="INTEGER" property="weekHeat" /> 
+	<result column="works_heat_time" jdbcType="INTEGER" property="weekHeatTime" /> 
+	<result column="submission_time" jdbcType="BIGINT" property="submissionTime" />
+	<result column="create_time" jdbcType="BIGINT" property="createTime" />
+    <result column="update_time" jdbcType="BIGINT" property="updateTime" />
+  </resultMap>
+  
+  <sql id="Review_Column_List">
+    id, mini_id, name, qq, mail, phone, team_mates, works_name, introduce, main_image, main_small_image, image_1, image_small_1, image_2, image_small_2,image_3, image_small_3,state, submission_time
+  </sql>
+  <sql id="Heat_Column_List">
+    id, mini_id,works_name, introduce, main_image, main_small_image, image_1, image_small_1, image_2, image_small_2,image_3, image_small_3,state, submission_time ,heat , week_heat, week_heat_time
+  </sql>
+  
+  <select id="selectAll"  resultMap="ReviewresultMap">
+    select 
+    <include refid="Review_Column_List" />
+    from ${eventId}_works
+  </select>
+  
+  <select id="selectByWorksState"  resultMap="ReviewresultMap">
+  	select
+  	<include refid="Review_Column_List" />
+  	from ${eventId}_works
+  	where state = #{worksState ,jdbcType=INTEGER}
+  </select>
+  
+  <select id="selectByWorksId"  resultMap="ReviewresultMap">
+    select 
+    <include refid="Review_Column_List" />
+    from ${eventId}_works
+    where id = #{worksId,jdbcType=INTEGER}
+  </select>
+  
+  <select id="selectByMiniId"  resultMap="ReviewresultMap">
+    select 
+    <include refid="Review_Column_List" />
+    from ${eventId}_works
+    where mini_id = #{miniId,jdbcType=INTEGER}
+  </select>
+  
+  <update id="updateByMiniId" >
+	update ${eventId}_works set
+	state = #{worksState,jdbcType=INTEGER},
+	update_time = #{updateTime,jdbcType=TIMESTAMP}
+	where mini_id = #{miniId,jdbcType=INTEGER}
+  </update>
+  
+  <select id="selectWorksData" resultMap="ReviewresultMap">
+	select
+	<include refid="Heat_Column_List" />
+	from ${eventId}_works
+	where state = 1
+  </select>
+  
+  <select id="worksDataSort" resultMap="ReviewresultMap">
+	  select
+	  <include refid="Heat_Column_List"/>
+	  from ${eventId}_works
+	  where state = 1
+	  order by ${sortField} ${sortParam}
+  </select>
+  
+  <select id="formReviewSort" resultMap="ReviewresultMap">
+	  select
+	  <include refid="Review_Column_List" />
+	  from ${eventId}_works
+	  where state = 1
+	  order by ${sortField} ${sortParam}
+  </select>
+  
+  <delete id="deleteWorks" >
+  	delete	
+  	from ${eventId}_works
+  	where mini_id = ${miniId}
+  </delete>
+  
+  <select id="checkState" resultType="java.lang.Integer">
+  		select state
+  		from ${eventId}_works
+  		where mini_id = ${miniId}
+  </select>
+  
+</mapper>

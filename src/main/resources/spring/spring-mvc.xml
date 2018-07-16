@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                        http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+                        http://www.springframework.org/schema/aop 
+	    				http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+                        http://www.springframework.org/schema/context
+                        http://www.springframework.org/schema/context/spring-context-3.1.xsd
+                        http://www.springframework.org/schema/mvc
+                        http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
+
+    <!-- 自动扫描该包，使SpringMVC认为包下用了@controller注解的类是控制器 -->
+    <context:component-scan base-package="com.miniworld.controller"/>
+
+    <!-- 扩充了注解驱动，可以将请求参数绑定到控制器参数 -->
+    <mvc:annotation-driven/>
+     <mvc:resources location="/resources/**" mapping="classpath:/resources/"/>
+
+    <!-- 静态资源处理  css js imgs -->
+    <mvc:default-servlet-handler/>
+    <mvc:resources mapping="/resources/**" location="/resources/" />
+    
+    <!-- AOP注解开启配置 -->
+    <aop:aspectj-autoproxy/>
+
+    <!--避免IE执行AJAX时，返回JSON出现下载文件 -->
+    <bean id="mappingJacksonHttpMessageConverter"
+          class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+        <property name="supportedMediaTypes">
+            <list>
+                <value>text/html;charset=UTF-8</value>
+            </list>
+        </property>
+    </bean>
+
+    <!-- 启动SpringMVC的注解功能，完成请求和注解POJO的映射 -->
+    <bean
+            class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+        <property name="messageConverters">
+            <list>
+                <ref bean="mappingJacksonHttpMessageConverter"/> <!-- JSON转换器 -->
+            </list>
+        </property>
+    </bean>
+
+
+    <!--json转换-->
+    <bean id="contentNegotiationManager"  class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
+        <property name="favorParameter" value="true"/>
+        <property name="parameterName" value="format"/>
+        <property name="ignoreAcceptHeader" value="false"/>
+        <property name="mediaTypes">
+            <value>
+                json=application/json
+                xml=application/xml
+                html=text/html
+            </value>
+        </property>
+        <property name="defaultContentType" value="text/html"/>
+    </bean>
+    
+    
+
+    <!-- 定义跳转的文件的前后缀 ，视图模式配置
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/jsp/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>-->
+    
+    <bean id="htmlviewResolver"    
+        class="org.springframework.web.servlet.view.InternalResourceViewResolver">   
+        <property name="viewClass" value="com.miniworld.utils.HtmlResourceView"/>  
+        <property name="order" value="0" />  
+        <property name="prefix" value="/WEB-INF/html/"/>  
+        <property name="suffix" value=".html" />    
+        <property name="contentType" value="text/html;charset=UTF-8"></property>    
+    </bean>  
+    <!-- 定义JSP文件的位置 -->  
+    <bean id="jspViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">  
+        <property name="order" value="1" />  
+        <property name="prefix" value="/WEB-INF/jsp/"/>  
+        <property name="suffix" value=".jsp"/>  
+    </bean>
+
+
+    <!-- spring context holder -->
+    <bean class="com.miniworld.common.SpringContextHolder"
+          lazy-init="false" />
+
+
+    <!-- 配置拦截器 -->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/> <!-- 表示拦截所有的url包括子url路径 -->
+            <bean class="com.miniworld.interceptors.SystemInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
+</beans>  
